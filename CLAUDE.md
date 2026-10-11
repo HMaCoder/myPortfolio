@@ -29,12 +29,6 @@ firebase deploy     # dist/를 Firebase Hosting에 업로드
 
 ## 페이지 구조
 
-`index.html`은 앵커 섹션(`#header`, `#about`, `#services`, `#portfolio`, `#contact`)으로 구성된 단일 페이지입니다. 외부 의존성은 CDN으로 불러옵니다: Font Awesome kit(아이콘), p5.js 1.4.0.
-
 `script.js`는 `<body>` 끝에서 로드되며 전역 함수/변수를 사용합니다. HTML은 인라인 `onclick` 속성으로 이 함수들을 호출합니다:
-- `openTab(event, tabName)` — About 섹션 탭. `.tab-links` / `.tab-contents`에 `active-link` / `active-tab` 클래스를 토글하며, 탭 내용은 element id로 찾습니다.
-- `openMenu()` / `closeMenu()` — `#side-menu`에 `open` 클래스를 토글합니다 (모바일 내비게이션).
 - 연락처 폼 `submit-to-google-sheet`은 `FormData`를 Google Apps Script URL로 POST합니다. `scriptURL`이 아직 placeholder(`"<add your own link here>"`)라서 폼 전송은 동작하지 않습니다.
 - p5.js는 **전역 모드**로 동작합니다: 최상위 `setup()`, `draw()`, `windowResized()`와 `Star` 클래스가 `#p5Container`(fixed, `z-index: -1`, 모든 콘텐츠 뒤)에 전체 화면 별 배경을 그립니다. 전역 모드이므로 `script.js`에 p5 전역 이름(`setup`, `draw`, `color`, `map`, `dist` 등)과 겹치는 최상위 함수/변수를 추가하지 않아야 합니다. 또한 `noCursor()`로 사이트 전체에서 마우스 커서가 숨겨지고, 대신 색이 바뀌는 원이 마우스를 따라다닙니다.
-
-`style.scss`는 상단에 SCSS 색상 변수(`$primary-color: #ff004f` 등)를 정의하고, 섹션별로 중첩 선택자를 사용합니다.
